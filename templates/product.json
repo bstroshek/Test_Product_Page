@@ -1,35 +1,66 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "product-main",
-      "settings": {
-        "default_delivery_days": 3
-      },
       "blocks": {
         "video_card": {
           "type": "video_card",
           "settings": {
-              "video_url": "",
-              "title": "Video Title"
+            "video_url": "https://youtube.com/shorts/SekA57AxJVE?si=kaEq5rwD6gOe-JnM",
+            "title": "5 Main Benefits"
+          }
+        },
+        "video_card_ptMqEE": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "https://youtube.com/shorts/SekA57AxJVE?si=kaEq5rwD6gOe-JnM",
+            "title": "5 Main Benefits"
+          }
+        },
+        "video_card_mXN6YD": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "https://youtube.com/shorts/SekA57AxJVE?si=kaEq5rwD6gOe-JnM",
+            "title": "5 Main Benefits"
+          }
+        },
+        "video_card_UdFctB": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "https://youtube.com/shorts/SekA57AxJVE?si=kaEq5rwD6gOe-JnM",
+            "title": "5 Main Benefits"
           }
         },
         "collapsible_item": {
           "type": "collapsible_item",
           "settings": {
-              "collapsible_title": "Title",
-              "icon": "",
-              "content": ""
+            "collapsible_title": "Title",
+            "content": ""
           }
         }
       },
       "block_order": [
         "video_card",
+        "video_card_ptMqEE",
+        "video_card_mXN6YD",
+        "video_card_UdFctB",
         "collapsible_item"
-      ]
+      ],
+      "settings": {
+        "default_delivery_days": 3
+      }
     }
   },
   "order": [
     "main"
   ]
 }
-
