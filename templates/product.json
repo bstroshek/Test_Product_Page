@@ -19,18 +19,18 @@
             "title": "5 Main Benefits"
           }
         },
-        "video_card_ptMqEE": {
-          "type": "video_card",
-          "settings": {
-            "video_url": "https://youtube.com/shorts/SekA57AxJVE?si=kaEq5rwD6gOe-JnM",
-            "title": "How To Use"
-          }
-        },
         "video_card_mXN6YD": {
           "type": "video_card",
           "settings": {
             "video_url": "https://youtube.com/shorts/SekA57AxJVE?si=kaEq5rwD6gOe-JnM",
             "title": "5 Main Benefits"
+          }
+        },
+        "video_card_ptMqEE": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "https://youtube.com/shorts/SekA57AxJVE?si=kaEq5rwD6gOe-JnM",
+            "title": "Ingredients"
           }
         },
         "collapsible_item": {
@@ -43,8 +43,8 @@
       },
       "block_order": [
         "video_card",
-        "video_card_ptMqEE",
         "video_card_mXN6YD",
+        "video_card_ptMqEE",
         "collapsible_item"
       ],
       "settings": {
