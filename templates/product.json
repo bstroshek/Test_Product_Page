@@ -40,13 +40,31 @@
             "icon": "shopify://shop_images/shipping-icon.svg",
             "content": "<p><strong>Lorem Ipsum</strong>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>"
           }
+        },
+        "collapsible_item_DbYgBP": {
+          "type": "collapsible_item",
+          "settings": {
+            "collapsible_title": "Product Description",
+            "icon": "shopify://shop_images/shipping-icon.svg",
+            "content": "<p><strong>Lorem Ipsum</strong>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>"
+          }
+        },
+        "collapsible_item_Mkhke4": {
+          "type": "collapsible_item",
+          "settings": {
+            "collapsible_title": "Product Description",
+            "icon": "shopify://shop_images/shipping-icon.svg",
+            "content": "<p><strong>Lorem Ipsum</strong>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>"
+          }
         }
       },
       "block_order": [
         "video_card",
         "video_card_mXN6YD",
         "video_card_ptMqEE",
-        "collapsible_item"
+        "collapsible_item",
+        "collapsible_item_DbYgBP",
+        "collapsible_item_Mkhke4"
       ],
       "settings": {
         "default_delivery_days": 3
