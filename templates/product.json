@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-main",
+      "settings": {
+        "default_delivery_days": 3
+      },
+      "blocks": {
+        "video_card": {
+          "type": "video_card",
+          "settings": {
+              "video_url": "",
+              "title": "Video Title"
+          }
+        },
+        "collapsible_item": {
+          "type": "collapsible_item",
+          "settings": {
+              "collapsible_title": "Title",
+              "icon": "",
+              "content": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_card",
+        "collapsible_item"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
+

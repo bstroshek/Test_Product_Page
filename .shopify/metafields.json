@@ -1,0 +1,76 @@
+{
+  "article": [],
+  "blog": [],
+  "brand": [],
+  "collection": [],
+  "company": [],
+  "company_location": [],
+  "location": [],
+  "market": [],
+  "order": [],
+  "page": [],
+  "product": [
+    {
+      "key": "bundle_1_price",
+      "namespace": "custom",
+      "name": "Bundle 1 price",
+      "description": "",
+      "type": {
+        "name": "money",
+        "category": "MONEY"
+      }
+    },
+    {
+      "key": "bundle_2_image",
+      "namespace": "custom",
+      "name": "Bundle 2 image",
+      "description": "",
+      "type": {
+        "name": "file_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "bundle_1_image",
+      "namespace": "custom",
+      "name": "Bundle 1 image",
+      "description": "",
+      "type": {
+        "name": "file_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "bundle_3_image",
+      "namespace": "custom",
+      "name": "Bundle 3 image",
+      "description": "",
+      "type": {
+        "name": "file_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "bundle_3_price",
+      "namespace": "custom",
+      "name": "Bundle 3 price",
+      "description": "",
+      "type": {
+        "name": "money",
+        "category": "MONEY"
+      }
+    },
+    {
+      "key": "bundle_2_price",
+      "namespace": "custom",
+      "name": "Bundle 2 price",
+      "description": "",
+      "type": {
+        "name": "money",
+        "category": "MONEY"
+      }
+    }
+  ],
+  "variant": [],
+  "shop": []
+}

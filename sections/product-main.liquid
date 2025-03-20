@@ -1,0 +1,342 @@
+<!--product.liquid-->
+
+<div class="product-hero w-full py-20">
+    <div class="product-hero__main max-w-[1200px] mx-auto md:grid md:grid-cols-2 md:px-10 lg:px-20">
+
+        <!-- Image Gallery -->
+
+        <div class="product-gallery flex flex-col items-center w-full mb-9 h-max">
+            <!-- Main Image Container -->
+            <div class="main-image-container relative w-full overflow-hidden mb-4">
+                <img id="mainImage" 
+                     src="{{ product.images.first | image_url: width: 1000 }}" 
+                     alt="{{ product.images.first.alt }}" 
+                     class="main-image w-full cursor-zoom-in transition-transform duration-300 ease-in-out"
+                     onmousemove="zoomImage(event)" 
+                     onmouseleave="resetZoom()">
+                <div class="zoom-lens">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
+                        <path d="M21.1473 20.3497L16.8868 16.0891C17.9106 14.86 18.4212 13.2834 18.3122 11.6874C18.2033 10.0914 17.4832 8.5989 16.3019 7.52029C15.1205 6.44168 13.5688 5.86004 11.9695 5.89638C10.3702 5.93272 8.84649 6.58423 7.71533 7.71539C6.58417 8.84655 5.93266 10.3703 5.89632 11.9695C5.85998 13.5688 6.44162 15.1206 7.52023 16.3019C8.59884 17.4833 10.0914 18.2033 11.6874 18.3123C13.2834 18.4212 14.8599 17.9107 16.089 16.8868L20.3496 21.1474L21.1473 20.3497ZM7.04322 12.1208C7.04322 11.1165 7.34101 10.1349 7.89893 9.29987C8.45685 8.46488 9.24985 7.81408 10.1776 7.42978C11.1054 7.04548 12.1263 6.94493 13.1113 7.14084C14.0962 7.33676 15.0009 7.82034 15.711 8.53044C16.4211 9.24054 16.9047 10.1453 17.1006 11.1302C17.2965 12.1151 17.196 13.136 16.8117 14.0638C16.4274 14.9916 15.7766 15.7846 14.9416 16.3425C14.1066 16.9005 13.1249 17.1983 12.1207 17.1983C10.7745 17.1968 9.48392 16.6613 8.53203 15.7094C7.58014 14.7576 7.04471 13.4669 7.04322 12.1208Z" fill="#111111"/>
+                      </svg>
+                </div>
+            </div>
+        
+            <!-- Thumbnails -->
+            <div class="thumbnails flex gap-4 overflow-x-scroll pl-[8px]">
+                {% for image in product.images %}
+                    <img src="{{ image | image_url: width: 150 }}" 
+                         alt="{{ image.alt }}" 
+                         class="thumbnail w-[75px] h-[75px] object-cover cursor-pointer border border-transparent transition-all duration-300 ease-in-out rounded-[4px]
+                         {% if forloop.first %} active {% endif %}" 
+                         onclick="changeImage('{{ image | image_url: width: 1000 }}', this)">
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Details -->
+        <div class="product-hero__details px-6 md:px-20">
+            {% form 'product', product %}
+                <input type="hidden" name="id" value="product.variants.first.id">
+                <div class="product-hero__details__holder text-left ">
+                    <div class="product-hero__details__main pb-9 border-b border-b-[#E5E5E5]">
+                        <div class="product-hero__rating mb-3.5 flex items-start">
+                            <img class="mr-[4px]" src="{{ 'rating-stars.svg' | asset_url }}" alt="Rating Stars">
+                            <p class="text-[#5B5B5B] leading-[100%]">Rated <b>4.9/5</b> by <span class="underline"><b>100+</b> Happy Customers</span></p>
+                        </div>
+                        <h1 class="product-hero__title uppercase mb-1">{{ product.title }}</h1>
+                        <div class="product-hero__price-holder flex flex-row items-center">
+                            {% if product.compare_at_price and product.compare_at_price > product.price %}
+                                {% assign discount_amount = product.compare_at_price | minus: product.price %}
+                                {% assign discount_percentage = discount_amount | times: 100.0 | divided_by: product.compare_at_price %}
+                            
+                                <span class="product-hero__price-old line-through mr-2 text-[#959595] text-[2rem]">{{ product.compare_at_price | money }}</span>
+                            {% endif %}
+                                <span class="product-hero__price-new font-black text-[2.2rem] mr-[6px]">{{ product.price | money }}</span>
+                            {% if product.compare_at_price and product.compare_at_price > product.price %}
+                                <span class="product-hero__badge text-[#242328] text-[14px] py-[4px] px-[8px] rounded-[4px] bg-[#FFE535]">SAVE {{ discount_percentage | round }}%</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <!-- Description -->
+                {% if product.description != blank %}
+                    <div class="product-hero__description py-10 border-b border-b-[#E5E5E5]">
+                        {{ product.description }}
+                    </div>
+                {% endif %}
+
+                <!-- FREQUENCY -->
+                <div class="roduct-hero__frequency justify-start text-stone-900 text-base py-10 border-b border-b-[#E5E5E5]">
+                    <div class="roduct-hero__frequency-top w-full inline-flex justify-between items-start mb-9">
+                        <div class="text-2xl font-medium">FREQUENCY</div>
+                        <div class="oduct-hero__subscription-details flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M7.99999 14.6666C4.31799 14.6666 1.33333 11.682 1.33333 7.99998C1.33333 4.31798 4.31799 1.33331 7.99999 1.33331C11.682 1.33331 14.6667 4.31798 14.6667 7.99998C14.6667 11.682 11.682 14.6666 7.99999 14.6666ZM7.33333 9.99998V11.3333H8.66666V9.99998H7.33333ZM8.66666 8.90331C9.20244 8.74183 9.6624 8.39328 9.96277 7.92114C10.2631 7.449 10.3839 6.88468 10.3032 6.33096C10.2224 5.77723 9.9454 5.27094 9.52267 4.90428C9.09994 4.53763 8.55958 4.335 7.99999 4.33331C7.46056 4.33327 6.93777 4.52008 6.52052 4.86197C6.10327 5.20387 5.81733 5.67973 5.71133 6.20865L7.01933 6.47065C7.05645 6.28493 7.14554 6.11358 7.27624 5.97652C7.40694 5.83947 7.57387 5.74234 7.75761 5.69645C7.94135 5.65056 8.13435 5.65779 8.31414 5.71729C8.49394 5.7768 8.65313 5.88614 8.77322 6.03259C8.8933 6.17904 8.96932 6.35657 8.99245 6.54454C9.01557 6.73251 8.98485 6.92318 8.90384 7.09437C8.82284 7.26556 8.69489 7.41022 8.53488 7.51153C8.37487 7.61284 8.18938 7.66663 7.99999 7.66665C7.82318 7.66665 7.65361 7.73688 7.52859 7.86191C7.40357 7.98693 7.33333 8.1565 7.33333 8.33331V9.33331H8.66666V8.90331Z" fill="#7D7D7D"/>
+                                </svg>
+                                <a href="" class="pl-1 text-zinc-500 text-[1.2rem] underline">Subscription Details</a>
+                        </div>
+                    </div>
+                    <div class="roduct-hero__frequency-main flex flex-col gap-4">
+                        <!-- One-Time Purchase Option -->
+                        <label class="cursor-pointer purchase-option w-full flex flex-row px-6 py-4 rounded-[4px] border justify-between items-center border-[#ADADAD] p-[15px] transition-all duration-300 ease-in-out relative">
+                            <div class="flex items-center">
+                                <input class="hidden" type="radio" name="purchase_type" value="one_time" checked>
+                                 <span class="radio-circle w-[16px] h-[16px] border border-[#242328] rounded-full inline-block relative"></span>
+                                <span class="text pl-2 text-[14px] font-medium">ONE TIME PURCHASE</span>
+                            </div>
+                            <span class="text-[14px] font-black">{{ product.price | money }}</span>
+                        </label>
+
+                          <!-- Subscription Option -->
+                        <label class="cursor-pointer purchase-option w-full flex flex-row px-6 py-4 rounded-[4px] border justify-between items-center border-[#ADADAD] p-[15px] transition-all duration-300 ease-in-out relative">
+                            <span class="flex items-start gap-2">
+                                <input class="hidden" type="radio" name="purchase_type" value="subscribe">
+                                 <span class="flex-shrink-0 radio-circle w-[16px] h-[16px] border-1 border-[#242328] rounded-full inline-block relative"></span>
+                                <span class="text pl-2 text-[14px] font-medium">SUBSCRIBE <span class="discount-badge">SAVE 15%</span></span>
+                            </span>
+                            <span class="flex items-center">
+                                <span class="text-[14px] font-bold text-[#959595] line-through">{{ product.price | money }}</span>
+                                <span class="text-[14px] font-black pl-1">{{ product.price | times: 0.85 | money }}</span>
+                            </span>
+                        </label>
+                    </div>
+                </div> 
+
+                <!-- Bundles -->
+                <div class="justify-between py-10">
+                    <div class="w-full inline-flex justify-between items-start mb-[7px]">
+                        <div class="text-2xl font-medium">BUNDLE & SAVE:</div>
+                    </div>
+                    <div class="flex flex-row items-end gap-4">
+                        {% assign bundle_1_price = product.metafields.custom.bundle_1_price.value %}
+                        {% assign bundle_2_price = product.metafields.custom.bundle_2_price.value %}
+                        {% assign bundle_3_price = product.metafields.custom.bundle_3_price.value %}
+                        
+                        {% assign bundle_1_image = product.metafields.custom.bundle_1_image %}
+                        {% assign bundle_2_image = product.metafields.custom.bundle_2_image %}
+                        {% assign bundle_3_image = product.metafields.custom.bundle_3_image %}
+                    
+                        {% if bundle_1_price and bundle_1_image %}
+                          <label class="bundle-option">
+                            <input class="hidden" type="radio" name="properties[Bundle Selection]" value="{{ bundle_1_price | divided_by: 100.0 | round: 2 }}" checked>
+                            <img 
+                                class="border border-[#DEDEDE] rounded-[24px] border-b-[6px] border-b-transparent transition-all duration-300 cursor-pointer"
+                                src="{{ bundle_1_image | file_url }}" 
+                                alt="Bundle 1">
+                          </label>
+                        {% endif %}
+                    
+                        {% if bundle_2_price and bundle_2_image %}
+                          <label class="bundle-option">
+                            <input class="hidden" type="radio" name="properties[Bundle Selection]" value="{{ bundle_2_price | divided_by: 100.0 | round: 2 }}">
+                            <img 
+                            class="border border-[#DEDEDE] rounded-[24px] border-b-[6px] border-b-transparent transition-all duration-300 cursor-pointer"
+                                src="{{ bundle_2_image | file_url }}" 
+                                alt="Bundle 2">
+                          </label>
+                        {% endif %}
+                    
+                        {% if bundle_3_price and bundle_3_image %}
+                          <label class="bundle-option">
+                            <input class="hidden" type="radio" name="properties[Bundle Selection]" value="{{ bundle_3_price | divided_by: 100.0 | round: 2 }}">
+                            <img 
+                            class="border border-[#DEDEDE] rounded-[24px] border-b-[6px] border-b-transparent transition-all duration-300 cursor-pointer"
+                                src="{{ bundle_3_image | file_url }}" 
+                                alt="Bundle 3">
+                          </label>
+                        {% endif %}
+                    </div>
+                    
+                </div> 
+
+                <!-- Order by -->
+                 {%- assign delivery_days = settings.default_delivery_days -%}
+                 {%- assign today = "now" | date: "%s" | plus: 0 -%}
+                 {%- assign delivery_timestamp = today | plus: delivery_days | times: 86400 -%}
+                 {%- assign delivery_date = delivery_timestamp | date: "%a, %b %d" -%}
+                 <div class="delivery-message flex-wrap w-ful flex flex-row justify-center gap-[5px] items-center py-[14px] px-[20px] rounded-[8px] bg-[#F5F5F5] mb-[12px] leading-[1]">
+                     <span class="inline-block w-[16px] h-[16px] bg-lime-500 rounded-full border-[4px] border-[#CFEFC4]"></span>
+                       Order today and get it by 
+                      <strong>{{ delivery_date }}</strong>
+                 </div>
+                 
+            <button
+            class="w-full px-6 py-5 bg-yellow-300 rounded-lg inline-flex justify-center items-center gap-1.5
+                     text-lime-950 text-[18px] font-black uppercase leading-normal mb-[16px]"
+             type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M6.1875 15.75C6.80882 15.75 7.3125 15.2463 7.3125 14.625C7.3125 14.0037 6.80882 13.5 6.1875 13.5C5.56618 13.5 5.0625 14.0037 5.0625 14.625C5.0625 15.2463 5.56618 15.75 6.1875 15.75Z" fill="#0D2B09"/>
+                    <path d="M14.0625 15.75C14.6838 15.75 15.1875 15.2463 15.1875 14.625C15.1875 14.0037 14.6838 13.5 14.0625 13.5C13.4412 13.5 12.9375 14.0037 12.9375 14.625C12.9375 15.2463 13.4412 15.75 14.0625 15.75Z" fill="#0D2B09"/>
+                    <path d="M16.0594 4.24617C15.9803 4.14951 15.8808 4.07166 15.7679 4.01827C15.6551 3.96487 15.5317 3.93729 15.4069 3.9375H4.70707L4.49156 2.71477C4.46858 2.58452 4.40045 2.46654 4.29912 2.38154C4.19779 2.29655 4.06976 2.24997 3.9375 2.25H1.6875C1.53832 2.25 1.39524 2.30926 1.28975 2.41475C1.18426 2.52024 1.125 2.66332 1.125 2.8125C1.125 2.96168 1.18426 3.10476 1.28975 3.21025C1.39524 3.31574 1.53832 3.375 1.6875 3.375H3.4657L5.07094 12.4727C5.09392 12.603 5.16205 12.721 5.26338 12.806C5.36471 12.891 5.49274 12.9375 5.625 12.9375H14.625C14.7742 12.9375 14.9173 12.8782 15.0227 12.7727C15.1282 12.6673 15.1875 12.5242 15.1875 12.375C15.1875 12.2258 15.1282 12.0827 15.0227 11.9773C14.9173 11.8718 14.7742 11.8125 14.625 11.8125H6.0968L5.89852 10.6875H14.3944C14.5894 10.6873 14.7784 10.6196 14.9294 10.496C15.0803 10.3725 15.1839 10.2005 15.2227 10.0093L16.2352 4.94684C16.2596 4.82432 16.2564 4.69791 16.226 4.57674C16.1956 4.45557 16.1387 4.34266 16.0594 4.24617Z" fill="#0D2B09"/>
+                </svg>
+             Add to Cart</button>
+            {% endform %}   
+
+            <!-- Shipping-returns -->
+            <div class="width-full gap-[10px] flex flex-row flex-wrap justify-center mb-[20px]">
+                <div class="flex flex-row flex-wrap items-center gap-[5px]">
+                    <img src="{{ 'delivery-icon.svg' | asset_url }}" alt="Icon" width="20" height="20">
+                    Free <span class="text-[#777A78]">Shipping Today</span>
+                </div>
+                <div class="flex flex-row flex-wrap items-center gap-[5px]">
+                    <img src="{{ 'return-icon.svg' | asset_url }}" alt="Icon" width="20" height="20">
+                    30-Day Easy <span class="text-[#777A78]">Returns</span>
+                </div>
+            </div>    
+
+            <!-- Payment methods -->
+            <div class="w-full flex flex-wrap items-center gap-x-4 gap-y-2 mb-[25px] justify-center">
+                <img src="{{ 'p1.svg' | asset_url }}" alt="Icon" width="44" height="31">
+                <img src="{{ 'p2.svg' | asset_url }}" alt="Icon" width="44" height="31">
+                <img src="{{ 'p3.svg' | asset_url }}" alt="Icon" width="44" height="31">
+                <img src="{{ 'p4.svg' | asset_url }}" alt="Icon" width="44" height="31">
+                <img src="{{ 'p5.svg' | asset_url }}" alt="Icon" width="44" height="31">
+                <img src="{{ 'p6.svg' | asset_url }}" alt="Icon" width="44" height="31">
+                <img src="{{ 'p7.svg' | asset_url }}" alt="Icon" width="44" height="31">
+            </div>
+
+            <!-- Video cards -->
+            {% if section.blocks.size > 0 %}
+                <div class="video-cards w-full flex flex-row gap-[7px] mb-[24px]">
+                {% for block in section.blocks %}
+                    <div class="video-card">
+                    {% if block.settings.video_url contains "youtube.com" or block.settings.video_url contains "youtu.be" %}
+                        <!-- Embed YouTube Video -->
+                        {% assign embed_url = block.settings.video_url %}
+
+                        {% if embed_url contains "youtube.com/shorts/" %}
+                            {% assign embed_url = embed_url | replace: "youtube.com/shorts/", "youtube.com/embed/" %}
+                            {% elsif embed_url contains "watch?v=" %}
+                            {% assign embed_url = embed_url | replace: "watch?v=", "embed/" %}
+                            {% endif %}
+
+                            <iframe height="220"
+                            class="w-full"
+                            src="{{ embed_url }}"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                            </iframe>
+
+                        {% elsif block.settings.video_url != blank %}
+                        <!-- Render as <video> only if it's a direct MP4 file -->
+                        <video controls>
+                        <source src="{{ block.settings.video_url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                        </video>
+                    {% endif %}
+                    <p class="video-title text-center leading-normal pt-[8px]">
+                        {{ block.settings.title }}
+                    </p>
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+          
+            <!-- Accordion -->
+            <ul class="accordion">
+                {% for block in section.blocks %}
+                {% if block.type == "collapsible_item" %}
+                <li class="mb-[8px]">
+                    <a class="toggle text-[#1D211E] relative w-full py-[14px] px-[16px] rounded border-l border-r border-t border-b-4 border-neutral-200 inline-flex justify-start items-center leading-none" href="javascript:void(0);">
+                        <img class="mr-[5px]" src="{{ block.settings.icon | image_url: width: 18, height: 18 }}" alt="Icon" width="18" height="18">
+                        {{ block.settings.collapsible_title }}
+                        <span class="toggle-icon absolute z-10 top-1/2 transform -translate-y-1/2 right-[16px]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect width="24" height="24" rx="12" fill="#FFE535"/>
+                                <path d="M18 12.8571H12.8571V18H11.1429V12.8571H6V11.1429H11.1429V6H12.8571V11.1429H18V12.8571Z" fill="#1D211E"/>
+                              </svg>
+                        </span>
+                    </a>
+                    <ul class="inner">
+                        <li class="px-[20px] py-[10px]">{{ block.settings.content }}</li>
+                    </ul>
+                    </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+  
+
+{% schema %}
+{
+  "name": "Product Main",
+  "settings": [
+    {
+      "id": "default_delivery_days",
+      "type": "number",
+      "label": "Delivery Days",
+      "default": 3
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video_card",
+      "name": "Video Card",
+      "settings": [
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card Title",
+          "default": "Video Title"
+        }
+      ]
+    },
+    {
+      "type": "collapsible_item",
+      "name": "Collapsible Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "collapsible_title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+          },
+        {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+        }
+      ]
+    }
+  ], 
+  "presets": [
+    {
+      "name": "Product Main",
+      "blocks": [
+        {
+          "type": "video_card"
+        },
+        {
+          "type": "collapsible_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+
+
+
+
+
+
+
+
+
+
+
