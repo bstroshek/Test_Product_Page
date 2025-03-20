@@ -44,7 +44,7 @@
         "collapsible_item_DbYgBP": {
           "type": "collapsible_item",
           "settings": {
-            "collapsible_title": "Product Description",
+            "collapsible_title": "Shipping Information",
             "icon": "shopify://shop_images/shipping-icon.svg",
             "content": "<p><strong>Lorem Ipsum</strong>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>"
           }
