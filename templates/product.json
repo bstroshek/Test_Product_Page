@@ -46,7 +46,7 @@
           "settings": {
             "collapsible_title": "Shipping Information",
             "icon": "shopify://shop_images/shipping-icon.svg",
-            "content": "<p><strong>Lorem Ipsum</strong>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>"
+            "content": "<p><strong>Lorem Ipsum</strong>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>"
           }
         },
         "collapsible_item_Mkhke4": {
@@ -54,7 +54,7 @@
           "settings": {
             "collapsible_title": "Frequently Asked Questions",
             "icon": "shopify://shop_images/ep_question-filled.svg",
-            "content": "<p><strong>Lorem Ipsum</strong>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>"
+            "content": "<p><strong>Lorem Ipsum</strong>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>"
           }
         }
       },
